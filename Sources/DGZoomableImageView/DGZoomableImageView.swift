@@ -17,6 +17,12 @@ open class DGZoomableImageView: UIScrollView {
         }
     }
     
+    public var imageViewContentMode: UIView.ContentMode = .scaleAspectFit {
+        didSet {
+            imageView.contentMode = .scaleAspectFit
+        }
+    }
+    
     convenience init() {
         self.init(frame: .zero)
         configureUI()
@@ -25,7 +31,7 @@ open class DGZoomableImageView: UIScrollView {
     private func configureUI() {
         // Setup image view
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = self.imageViewContentMode
         addSubview(imageView)
         NSLayoutConstraint.activate([
             imageView.widthAnchor.constraint(equalTo: widthAnchor),
