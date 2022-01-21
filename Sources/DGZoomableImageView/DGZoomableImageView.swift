@@ -9,9 +9,16 @@ open class DGZoomableImageView: UIScrollView {
         }
     }
     
-    convenience init(image: UIImage) {
+    public var urlString: String? {
+        didSet {
+            guard let urlString = urlString else { return }
+            guard let url = URL(string: urlString) else { return }
+            downloadImage(from: url)
+        }
+    }
+    
+    convenience init() {
         self.init(frame: .zero)
-        self.image = image
         configureUI()
     }
     
@@ -33,6 +40,19 @@ open class DGZoomableImageView: UIScrollView {
         showsHorizontalScrollIndicator = false
         showsVerticalScrollIndicator = false
         delegate = self
+    }
+    
+    private func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
+        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
+    }
+    
+    private func downloadImage(from url: URL) {
+        getData(from: url) { data, response, error in
+            guard let data = data, error == nil else { return }
+            DispatchQueue.main.async() { [weak self] in
+                self?.imageView.image = UIImage(data: data)
+            }
+        }
     }
     
 }
