@@ -40,6 +40,11 @@ open class DGZoomableImageView: UIScrollView {
         showsHorizontalScrollIndicator = false
         showsVerticalScrollIndicator = false
         delegate = self
+        
+        // Setup tap gesture
+        let doubleTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleDoubleTap(_:)))
+        doubleTapRecognizer.numberOfTapsRequired = 2
+        addGestureRecognizer(doubleTapRecognizer)
     }
     
     private func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
@@ -52,6 +57,14 @@ open class DGZoomableImageView: UIScrollView {
             DispatchQueue.main.async() { [weak self] in
                 self?.imageView.image = UIImage(data: data)
             }
+        }
+    }
+    
+    @objc private func handleDoubleTap(_ sender: UITapGestureRecognizer) {
+        if zoomScale == 1 {
+            setZoomScale(2, animated: true)
+        } else {
+            setZoomScale(1, animated: true)
         }
     }
     
