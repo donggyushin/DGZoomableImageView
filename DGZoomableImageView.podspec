@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'DGZoomableImageView'
-    s.version          = '1.0.1'
+    s.version          = '1.0.2'
     s.summary          = 'A zoomable, pan-able image view'
     s.homepage         = 'https://github.com/donggyushin/DGZoomableImageView'
     s.license          = { :type => 'MIT', :file => 'LICENSE.md' }
