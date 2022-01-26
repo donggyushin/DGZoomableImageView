@@ -23,9 +23,22 @@ open class DGZoomableImageView: UIScrollView {
         }
     }
     
-    convenience init() {
+    public convenience init() {
         self.init(frame: .zero)
         configureUI()
+    }
+    
+    public convenience init(urlString: String) {
+        self.init(frame: .zero)
+        configureUI()
+        guard let url = URL(string: urlString) else { return }
+        downloadImage(from: url)
+    }
+    
+    public convenience init(image: UIImage) {
+        self.init(frame: .zero)
+        configureUI()
+        self.imageView.image = image
     }
     
     private func configureUI() {
