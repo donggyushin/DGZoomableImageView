@@ -38,6 +38,7 @@ open class DGZoomableImageView: UIScrollView {
     public convenience init(image: UIImage) {
         self.init(frame: .zero)
         configureUI()
+        self.image = image
         self.imageView.image = image
     }
     
@@ -74,7 +75,9 @@ open class DGZoomableImageView: UIScrollView {
         getData(from: url) { data, response, error in
             guard let data = data, error == nil else { return }
             DispatchQueue.main.async() { [weak self] in
-                self?.imageView.image = UIImage(data: data)
+                let image = UIImage(data: data)
+                self?.image = image
+                self?.imageView.image = image
             }
         }
     }
