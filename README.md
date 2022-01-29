@@ -19,7 +19,7 @@ File > Add Packages > https://github.com/donggyushin/DGZoomableImageView
 
 ### CocoaPod
 ```
-pod 'DGZoomableImageView', :git => 'https://github.com/donggyushin/DGZoomableImageView'
+pod 'DGZoomableImageView', :git => 'https://github.com/donggyushin/DGZoomableImageView.git'
 ```
 
 ## Usage
